@@ -20,7 +20,7 @@
     "src"
   ],
   "scripts": {
-    "prepare": "npm run build",
+    "prepare": "npm run prepublish",
     "clean": "rimraf dist && rimraf build/dist",
     "build": "node build/build.js",
     "build:dll": "webpack --progress --config build/webpack.config.dll.js",
