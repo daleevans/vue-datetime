@@ -151,5 +151,8 @@
   "license": {
     "type": "MIT",
     "url": "http://www.opensource.org/licenses/mit-license.php"
+  },
+  "dependencies": {
+    "yarn": "^1.17.3"
   }
 }
