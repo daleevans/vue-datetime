@@ -107,6 +107,7 @@ use12-hour | `Boolean` | `false` | Display 12 hour (AM/PM) mode
 hour-step | `Number` | `1` | Hour step.
 minute-step | `Number` | `1` | Minute step.
 disabled-days |`Array` of ISO 8601 `String`s or `Function` | `[]` | Dates to disable in the calendar.
+disable-weekends | `Boolean` | `false` | Disable all weeekends in the calendar.
 min-datetime | ISO 8601 `String` | `null` | Minimum datetime.
 max-datetime | ISO 8601 `String` | `null` | Maximum datetime.
 auto | `Boolean` | `false` | Auto continue/close on select.
