@@ -43,6 +43,10 @@ export default {
     disabledDays: {
       type: [Array, Function]
     },
+    disableWeekends: {
+      type: Boolean,
+      default: false
+    },
     minDate: {
       type: DateTime,
       default: null
@@ -99,7 +103,9 @@ export default {
       this.newDate = this.newDate.plus({ months: 1 })
     },
     isDisabled (day) {
-      return monthDayIsDisabled(this.minDate, this.maxDate, this.newYear, this.newMonth, day, this.disabledDays)
+      const dt = DateTime.fromObject({ year: this.newYear, month: this.newMonth, day: day })
+      const isWeekend = [6, 7].indexOf(dt.weekday) > -1
+      return (monthDayIsDisabled(this.minDate, this.maxDate, this.newYear, this.newMonth, day, this.disabledDays) || (isWeekend && this.disableWeekends))
     }
   }
 }

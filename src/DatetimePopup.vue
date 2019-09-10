@@ -26,6 +26,7 @@
           :month="month"
           :day="day"
           :disabled-days="disabledDays"
+          :disable-weekends="disableWeekends"
           :min-date="minDatetimeUTC"
           :max-date="maxDatetimeUTC"
           :week-start="weekStart"
@@ -104,6 +105,10 @@ export default {
     },
     disabledDays: {
       type: [Array, Function]
+    },
+    disableWeekends: {
+      type: Boolean,
+      default: false
     },
     minDatetime: {
       type: DateTime,

@@ -3,6 +3,7 @@
   "extends": "stylelint-config-standard",
   "rules": {
     "no-empty-source": null,
-    "number-leading-zero": null
+    "number-leading-zero": null,
+    "max-empty-lines": null
   }
 }

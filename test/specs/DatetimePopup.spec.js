@@ -322,6 +322,22 @@ describe('DatetimePopup.vue', function () {
       expect(vm.$findChild('.vdatetime-calendar').disabledDays[0].toISODate()).to.be.equal('2018-01-01')
     })
 
+    it('should disable weekends', function () {
+      const vm = createVM(this,
+        `<DatetimePopup :datetime="datetime" type="date" :disable-weekends="disableWeekends"></DatetimePopup>`,
+        {
+          components: { DatetimePopup },
+          data () {
+            return {
+              datetime: LuxonDatetime.local(),
+              disableWeekends: true
+            }
+          }
+        })
+
+      expect(vm.$findChild('.vdatetime-calendar').disableWeekends).to.be.equal(true)
+    })
+
     it('should pass min and max date to calendar', function () {
       const vm = createVM(this,
         `<DatetimePopup :datetime="datetime" type="datetime" :min-datetime="minDatetime" :max-datetime="maxDatetime"></DatetimePopup>`,

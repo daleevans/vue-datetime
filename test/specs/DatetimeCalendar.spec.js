@@ -164,6 +164,29 @@ describe('DatetimeCalendar.vue', function () {
         }
       })
     })
+
+    it('should disable weekends', function () {
+      const vm = createVM(this,
+        `<DatetimeCalendar :year="2019" :month="9" :day="8" :disable-weekends="true"></DatetimeCalendar>`,
+        {
+          components: { DatetimeCalendar }
+        })
+
+      const monthDays = vm.$$('.vdatetime-calendar__month__day')
+      const weekendDays = [7, 8, 14, 15, 21, 22, 28, 29]
+
+      monthDays.forEach(monthDay => {
+        const dayNumber = parseInt(monthDay.textContext)
+
+        if (!isNaN(dayNumber)) {
+          if (weekendDays.indexOf(dayNumber) > -1) {
+            expect(monthDay).to.have.class('vdatetime-calendar__month__day--disabled')
+          } else {
+            expect(monthDay).to.have.not.class('vdatetime-calendar__month__day--disabled')
+          }
+        }
+      })
+    })
   })
 
   describe('navigation', function () {

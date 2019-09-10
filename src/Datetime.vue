@@ -25,6 +25,7 @@
           :hour-step="hourStep"
           :minute-step="minuteStep"
           :disabled-days="popupDisabledDays"
+          :disable-weekends="disableWeekends"
           :min-datetime="popupMinDatetime"
           :max-datetime="popupMaxDatetime"
           @confirm="confirm"
@@ -81,7 +82,7 @@ export default {
     },
     zone: {
       type: String,
-      default: 'local'
+      default: 'UTC'
     },
     format: {
       type: [Object, String],
@@ -115,6 +116,10 @@ export default {
     },
     disabledDays: {
       type: [Array, Function]
+    },
+    disableWeekends: {
+      type: Boolean,
+      default: false
     },
     minDatetime: {
       type: String,

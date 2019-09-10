@@ -238,7 +238,7 @@ describe('Datetime.vue', function () {
 
     it('should pass disabled days to popup', function (done) {
       const vm = createVM(this,
-        `<Datetime type="datetime" :disabled-days="['2018-01-01T12:35:22.000Z']"></Datetime>`,
+        `<Datetime type="datetime" :disabled-days="['2018-01-01T12:35:22.000Z']" :disable-weekends="true"></Datetime>`,
         {
           components: { Datetime }
         })
@@ -247,6 +247,7 @@ describe('Datetime.vue', function () {
 
       vm.$nextTick(() => {
         expect(vm.$findChild('.vdatetime-popup').disabledDays[0].toISODate()).to.be.equal('2018-01-01')
+        expect(vm.$findChild('.vdatetime-popup').disableWeekends).to.be.equal(true)
         done()
       })
     })
