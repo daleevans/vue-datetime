@@ -522,26 +522,6 @@ describe('Datetime.vue', function () {
       })
     })
 
-    it('should be a time in the local time zone on default', function (done) {
-      const vm = createVM(this,
-        `<Datetime v-model="datetime" type="time"></Datetime>`,
-        {
-          components: { Datetime },
-          data () {
-            return {
-              datetime: '2017-12-07T09:00:00.000Z'
-            }
-          }
-        })
-
-      vm.$nextTick(() => {
-        const time = LuxonDateTime.fromISO('2017-12-07T09:00:00.000Z').toUTC().setZone('local').toLocaleString(LuxonDateTime.TIME_24_SIMPLE)
-
-        expect(vm.$('.vdatetime-input').value).to.be.equal(time)
-        done()
-      })
-    })
-
     it('should be a time converted to utc', function () {
       const vm = createVM(this,
         `<Datetime v-model="datetime" type="time" value-zone="UTC-05:00"></Datetime>`,
@@ -587,24 +567,6 @@ describe('Datetime.vue', function () {
         })
 
       expect(vm.$('.vdatetime-input').value).to.be.empty
-    })
-
-    it('should be a date in the local time zone by default', function () {
-      const vm = createVM(this,
-        `<Datetime type="datetime" v-model="datetime" :format="format"></Datetime>`,
-        {
-          components: { Datetime },
-          data () {
-            return {
-              datetime: '2017-12-07T19:34:54.078+03:00',
-              format: LuxonDateTime.DATETIME_MED
-            }
-          }
-        })
-
-      const localDateString = LuxonDateTime.fromISO('2017-12-07T19:34:54.078+03:00').toLocal().toLocaleString(LuxonDateTime.DATETIME_MED)
-
-      expect(vm.$('.vdatetime-input').value).to.be.equal(localDateString)
     })
 
     it('should be a date in the specified time zone', function () {
