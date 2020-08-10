@@ -1,5 +1,5 @@
 <template>
-  <div class="vdatetime">
+  <div class="vdatetime" v-bind:class="{ 'error': hasError }">
     <slot name="before"></slot>
     <input class="vdatetime-input"
            :class="inputClass"
@@ -150,7 +150,8 @@ export default {
   data () {
     return {
       isOpen: false,
-      datetime: datetimeFromISO(this.value)
+      datetime: datetimeFromISO(this.value),
+      hasError: false
     }
   },
 
@@ -261,6 +262,12 @@ export default {
     setValue (event) {
       this.datetime = datetimeFromISO(event.target.value)
       this.emitInput()
+    },
+    setError () {
+      this.hasError = true
+    },
+    clearError () {
+      this.hasError = false
     }
   }
 }
@@ -286,5 +293,13 @@ export default {
   left: 0;
   background: rgba(0, 0, 0, 0.5);
   transition: opacity .5s;
+}
+
+div.error > input {
+  box-shadow: 0 0 1.5px 1px red;
+}
+
+div.error > input {
+  box-shadow: 0 0 2px 2px rgba(255,0,0,0.4);
 }
 </style>

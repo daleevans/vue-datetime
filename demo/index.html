@@ -19,7 +19,10 @@
 
   <div class="example">
     <div class="example-inputs">
-      <datetime v-model="date"></datetime>
+      <datetime ref="date1" v-model="date"></datetime>
+
+      <button type="button" @click="$refs.date1.setError()">Set Error On</button>
+      <button type="button" @click="$refs.date1.clearError()">Clear Error</button>
 
       <div class="values">
         <p>

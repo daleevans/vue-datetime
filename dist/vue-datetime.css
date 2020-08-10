@@ -267,6 +267,13 @@
 
 
 
+
+
+
+
+
+
+
 .vdatetime-fade-enter-active,
 .vdatetime-fade-leave-active {
   transition: opacity .4s;
@@ -286,6 +293,14 @@
   left: 0;
   background: rgba(0, 0, 0, .5);
   transition: opacity .5s;
+}
+
+div.error > input {
+  box-shadow: 0 0 1.5px 1px red;
+}
+
+div.error > input {
+  box-shadow: 0 0 2px 2px rgba(255, 0, 0, .4);
 }
 
 
