@@ -13,6 +13,7 @@ new Vue({
     return {
       time: '19:06',
       date: '2018-05-12T00:00:00.000Z',
+      openOnFocus: true,
       datetime: '2018-05-12T17:19:06.151Z',
       datetime12: '2018-05-12T17:19:06.151Z',
       datetime13: '2018-05-12T17:19:06.151Z',
@@ -21,6 +22,15 @@ new Vue({
       minDatetime: LuxonDateTime.local().minus({ month: 1, days: 3 }).toISO(),
       maxDatetime: LuxonDateTime.local().plus({ days: 3 }).toISO(),
       datetimeTheming: LuxonDateTime.local().toISO()
+    }
+  },
+
+  methods: {
+    focusOnNextField (e) {
+      if (e.keyCode === 13) {
+        console.log('Next field eh?')
+        this.$refs.date2.focus()
+      }
     }
   }
 })

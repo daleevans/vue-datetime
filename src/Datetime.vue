@@ -1,7 +1,8 @@
 <template>
   <div class="vdatetime" v-bind:class="{ 'error': hasError }">
     <slot name="before"></slot>
-    <input class="vdatetime-input"
+    <input ref="inputTextField"
+           class="vdatetime-input"
            :class="inputClass"
            :style="inputStyle"
            :id="inputId"
@@ -10,7 +11,8 @@
            v-bind="$attrs"
            v-on="$listeners"
            @click="open"
-           @focus="open">
+           @focus="open"
+           @keydown="keyDownProxy">
     <input v-if="hiddenName" type="hidden" :name="hiddenName" :value="value" @input="setValue">
     <slot name="after"></slot>
     <transition-group name="vdatetime-fade" tag="div">
@@ -144,6 +146,13 @@ export default {
     },
     title: {
       type: String
+    },
+    openOnFocus: {
+      type: Boolean,
+      default: true
+    },
+    keyDown: {
+      type: Function
     }
   },
 
@@ -220,6 +229,8 @@ export default {
       this.$emit('input', datetime ? datetime.toISO() : '')
     },
     open (event) {
+      if (event.type === 'focus' && !this.openOnFocus) return
+
       event.target.blur()
 
       this.isOpen = true
@@ -268,6 +279,12 @@ export default {
     },
     clearError () {
       this.hasError = false
+    },
+    focus () {
+      this.$refs.inputTextField.focus()
+    },
+    keyDownProxy (event) {
+      if (this.keyDown) this.keyDown(event)
     }
   }
 }
@@ -300,6 +317,6 @@ div.error > input {
 }
 
 div.error > input {
-  box-shadow: 0 0 2px 2px rgba(255,0,0,0.4);
+  box-shadow: 0 0 2px 2px rgba(255, 0, 0, 0.4);
 }
 </style>
