@@ -7,7 +7,7 @@
 [![Build](https://img.shields.io/travis/mariomka/vue-datetime/v1.x.svg?style=flat-square)](https://travis-ci.org/mariomka/vue-datetime)
 [![Coverage](https://img.shields.io/codecov/c/github/mariomka/vue-datetime/v1.x.svg?style=flat-square)](https://codecov.io/gh/mariomka/vue-datetime)
 
-> Mobile friendly datetime picker for Vue. Supports date, datetime and time modes, i18n and disabling dates.
+> Mobile friendly datetime picker for Vue. Supports date, datetime and time modes, i18n and more.
 
 ## Demo
 
@@ -35,7 +35,7 @@ npm install --save luxon vue-datetime weekstart
 
 ```js
 import Vue from 'vue'
-import Datetime from 'vue-datetime'
+import { Datetime } from 'vue-datetime'
 // You need a specific loader for CSS files
 import 'vue-datetime/dist/vue-datetime.css'
 
@@ -77,6 +77,13 @@ Download vue, luxon, weekstart and vue-datetime or use a CDN like unpkg.
 <script src="vue-datetime.js"></script>
 ```
 
+The component registers itself automatically as `<datetime>`. If you want to use a different name then register it explicitly:
+
+```js
+Vue.component('vue-datetime', window.VueDatetime.Datetime);
+```
+
+
 **weekstart** is optional, is used to get the first day of the week.
 
 ## Usage
@@ -114,6 +121,8 @@ auto | `Boolean` | `false` | Auto continue/close on select.
 week-start | `Number` | auto from locale if _weekstart_ is available or `1` | First day of the week. 1 is Monday and 7 is Sunday.
 flow | `Array` | Depends of *type* | Customize steps flow, steps available: time, date, month, year. Example: ['year', 'date', 'time']
 title | `String` | `''` | Popup title.
+hide-backdrop | `Boolean` | `false` | Show/Hide backdrop.
+backdrop-click | `Boolean` | `true` | Enable/Disable backdrop click to cancel (outside click).
 
 Input inherits all props not defined above but `style` and `class` will be inherited by root element. [See inheritAttrs option](https://vuejs.org/v2/api/#inheritAttrs)
 

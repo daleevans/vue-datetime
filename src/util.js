@@ -23,8 +23,7 @@ export function monthDays (year, month, weekStart) {
     lastDay += 7
   }
 
-  return new Array(monthDate.daysInMonth + firstDay + lastDay)
-    .fill(null)
+  return Array.apply(null, Array(monthDate.daysInMonth + firstDay + lastDay))
     .map((value, index) =>
       (index + 1 <= firstDay || index >= firstDay + monthDate.daysInMonth) ? null : (index + 1 - firstDay)
     )
@@ -43,8 +42,8 @@ export function dateInArray (date, array) {
 export function monthDayIsDisabled (minDate, maxDate, year, month, day, disabled) {
   const date = DateTime.fromObject({ year, month, day, zone: 'UTC' })
 
-  minDate = minDate ? startOfDay(minDate) : null
-  maxDate = maxDate ? startOfDay(maxDate) : null
+  minDate = minDate ? startOfDay(minDate.setZone('UTC', { keepLocalTime: true })) : null
+  maxDate = maxDate ? startOfDay(maxDate.setZone('UTC', { keepLocalTime: true })) : null
 
   return (minDate && date < minDate) ||
          (maxDate && date > maxDate) ||
@@ -66,8 +65,8 @@ export function yearIsDisabled (minDate, maxDate, year) {
 }
 
 export function timeComponentIsDisabled (min, max, component) {
-  return (min && component < min) ||
-         (max && component > max)
+  return (min !== null && component < min) ||
+         (max !== null && component > max)
 }
 
 export function weekdays (weekStart) {
@@ -87,15 +86,15 @@ export function months () {
 }
 
 export function hours (step) {
-  return new Array(Math.ceil(24 / step)).fill(null).map((item, index) => index * step)
+  return Array.apply(null, Array(Math.ceil(24 / step))).map((item, index) => index * step)
 }
 
 export function minutes (step) {
-  return new Array(Math.ceil(60 / step)).fill(null).map((item, index) => index * step)
+  return Array.apply(null, Array(Math.ceil(60 / step))).map((item, index) => index * step)
 }
 
 export function years (current) {
-  return new Array(201).fill(null).map((item, index) => current - 100 + index)
+  return Array.apply(null, Array(201)).map((item, index) => current - 100 + index)
 }
 
 export function pad (number) {
@@ -131,7 +130,7 @@ export function weekStart () {
   let weekstart
 
   try {
-    weekstart = require('weekstart')
+    weekstart = require('weekstart/package.json').version ? require('weekstart') : null
   } catch (e) {
     weekstart = window.weekstart
   }

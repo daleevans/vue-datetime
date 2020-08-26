@@ -134,6 +134,7 @@ export default {
 
   & svg {
     width: 8px;
+    height: 13px;
 
     & path {
       transition: stroke .3s;

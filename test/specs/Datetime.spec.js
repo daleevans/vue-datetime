@@ -44,6 +44,16 @@ describe('Datetime.vue', function () {
       expect(vm.$('.vdatetime-input')).to.have.id('id-name')
     })
 
+    it('should not add empty id to input', function () {
+      const vm = createVM(this,
+        `<Datetime></Datetime>`,
+        {
+          components: { Datetime }
+        })
+
+      expect(vm.$('.vdatetime-input')).to.not.have.attribute('id')
+    })
+
     it('should add style to input', function () {
       const vm = createVM(this,
         `<Datetime :input-style="{backgroundColor: 'cyan'}"></Datetime>`,
@@ -841,6 +851,40 @@ describe('Datetime.vue', function () {
           expect(vm.$('.vdatetime-popup')).to.not.exist
           done()
         })
+      })
+    })
+
+    it('should not close when clicking the overlay', function (done) {
+      const vm = createVM(this,
+        `<Datetime :backdropClick="false"></Datetime>`,
+        {
+          components: { Datetime }
+        })
+
+      vm.$('.vdatetime-input').click()
+
+      vm.$nextTick(() => {
+        vm.$('.vdatetime-overlay').click()
+        vm.$nextTick(() => {
+          expect(vm.$('.vdatetime-overlay')).to.exist
+          expect(vm.$('.vdatetime-popup')).to.exist
+          done()
+        })
+      })
+    })
+
+    it('should not render overlay', function (done) {
+      const vm = createVM(this,
+        `<Datetime :hideBackdrop="true"></Datetime>`,
+        {
+          components: { Datetime }
+        })
+
+      vm.$('.vdatetime-input').click()
+
+      vm.$nextTick(() => {
+        expect(vm.$('.vdatetime-overlay')).to.not.exist
+        done()
       })
     })
   })
